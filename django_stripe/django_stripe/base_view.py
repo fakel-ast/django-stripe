@@ -4,12 +4,9 @@ from typing import Optional, Union
 
 from django.http import JsonResponse
 from django.views import View
-from pydantic import BaseModel
 
 
 class BaseView(View):
-    schema: Optional[BaseModel] = None
-
     def dispatch(self, request, *args, **kwargs):
         try:
             response = super().dispatch(request, *args, **kwargs)
@@ -28,10 +25,3 @@ class BaseView(View):
             safe=not isinstance(data, list),
         )
 
-    def parse_schemas(self):
-        if self.schema:
-            return self.schema.parse_obj(self.parse_json())
-        return None
-
-    def parse_json(self) -> Union[dict, list]:
-        return json.loads(self.request.body)
