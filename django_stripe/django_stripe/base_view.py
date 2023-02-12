@@ -8,11 +8,7 @@ from django.views import View
 
 class BaseView(View):
     def dispatch(self, request, *args, **kwargs):
-        try:
-            response = super().dispatch(request, *args, **kwargs)
-        except Exception as e:
-            return self._response({'errorMessage': str(e)}, status=400)
-
+        response = super().dispatch(request, *args, **kwargs)
         if isinstance(response, (dict, list)):
             return self._response(response)
         return response
