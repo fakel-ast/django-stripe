@@ -1,17 +1,17 @@
 
-[//]: # (### Залитый проект)
+### Залитый проект
 
-[//]: # ()
-[//]: # (Залитый проект: https://)
 
-[//]: # ()
-[//]: # (Admin panel находиться по ссылке "/admin"  )
+Залитый проект: http://fakelast.pythonanywhere.com
 
-[//]: # (Данные для входа:)
 
-[//]: # (- Login: "admin")
+Admin panel находиться по ссылке "/admin"  
 
-[//]: # (- Password: "admin")
+Данные для входа:
+
+- Login: "admin"
+
+- Password: "admin"
 
 
 
@@ -38,3 +38,9 @@ git clone https://github.com/fakel-ast/django-stripe.git
 
 - Сделать миграции в где лежит manage.py командой: ```python manage.py makemigration & python manage.py migrate```
 - Запустить django проложение, прописав: ```python manage.py runserver```
+
+
+#### env
+Файл .env нужно создать по пути: django-stripe/django_stripe (рядом с manage.py)  
+Данные в .env скину в ответе на hh (надеюсь не забыл)
+
