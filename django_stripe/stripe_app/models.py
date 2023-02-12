@@ -6,4 +6,6 @@ class Item(models.Model):
     description = models.CharField(max_length=255, verbose_name='Description')
     price = models.IntegerField(verbose_name='Price')
 
+    def __str__(self):
+        return self.name
 
