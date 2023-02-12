@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buy cool new product</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<section>
+    <div class="product">
+        <div class="description">
+            <h3>Title: {{ item.name }}</h3>
+            <h5>Description: {{ item.description }}</h5>
+            <h5>Price: ${{ item.price }}</h5>
+        </div>
+    </div>
+    <form id="buy-form" action="/buy/{{ item.id }}/" method="GET">
+        <button type="submit">Buy</button>
+    </form>
+</section>
+
+
+<script type="text/javascript">
+    const stripe = Stripe("{{ STRIPE_PUBLISH_KEY }}");
+
+    const buyForm = document.querySelector('#buy-form');
+    buyForm.addEventListener('submit', event => {
+        event.preventDefault();
+        // get session id and then redirect to check out form
+        fetch(event.target.action)
+            .then(data => data.json())
+            .then(({id: sessionId}) => stripe.redirectToCheckout({sessionId: sessionId}))
+            .then(result => {
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+    })
+</script>
+</body>
+</html>

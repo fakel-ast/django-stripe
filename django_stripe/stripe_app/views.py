@@ -10,10 +10,23 @@ from stripe_app.models import Item
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
+class ItemDetail(TemplateView):
+    template_name = 'item_detail.html'
+
+    def get_context_data(self, **kwargs):
+        item = Item.objects.filter(id=kwargs.get('id')).first()
+        if not item:
+            raise Http404
+        context = super().get_context_data(**kwargs)
+        context.update({
+            "item": item,
+            'STRIPE_PUBLISH_KEY': settings.STRIPE_PUBLISH_KEY
+        })
+        return context
 
 
 class ItemBuy(BaseView):
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         item = Item.objects.filter(id=kwargs.get('id')).first()
         if not item:
             raise Http404
