@@ -10,6 +10,10 @@ from stripe_app.models import Item
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
+class SuccessBuy(TemplateView):
+    template_name = 'success_buy.html'
+
+
 class ItemDetail(TemplateView):
     template_name = 'item_detail.html'
 
